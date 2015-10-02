@@ -5,6 +5,9 @@
  */
 package com.br.lp3.DAO;
 
+import com.br.lp3.entities.Histsugestao;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,10 +18,14 @@ import javax.persistence.Query;
  *
  * @author Raquel
  */
-public class HistsugestaoDAO implements GenericDAO<com.br.lp3.entities.Histsugestao>{
+public class HistsugestaoDAO extends UnicastRemoteObject implements GenericDAO<com.br.lp3.entities.Histsugestao>{
+
+    public HistsugestaoDAO() throws RemoteException {
+    }
+    
 
     @Override
-    public void insert(com.br.lp3.entities.Histsugestao e) {
+    public void insert(com.br.lp3.entities.Histsugestao e) throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -28,7 +35,7 @@ public class HistsugestaoDAO implements GenericDAO<com.br.lp3.entities.Histsuges
     }
 
     @Override
-    public List<com.br.lp3.entities.Histsugestao> readList() {
+    public List<com.br.lp3.entities.Histsugestao> readList()throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
@@ -41,7 +48,7 @@ public class HistsugestaoDAO implements GenericDAO<com.br.lp3.entities.Histsuges
     }
 
     @Override
-    public com.br.lp3.entities.Histsugestao read(com.br.lp3.entities.Histsugestao e) {
+    public com.br.lp3.entities.Histsugestao read(Histsugestao e) throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
@@ -55,12 +62,12 @@ public class HistsugestaoDAO implements GenericDAO<com.br.lp3.entities.Histsuges
     }
 
     @Override
-    public void update(com.br.lp3.entities.Histsugestao e, int id) {
+    public void update(Histsugestao e, int id) throws RemoteException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(com.br.lp3.entities.Histsugestao e) {
+    public void delete(Histsugestao e)throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

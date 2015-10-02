@@ -6,6 +6,8 @@
 package com.br.lp3.DAO;
 
 import com.br.lp3.entities.Heroi;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,10 +18,15 @@ import javax.persistence.Query;
  *
  * @author Raquel
  */
-public class HeroiDAO implements GenericDAO<Heroi> {
+public class HeroiDAO extends UnicastRemoteObject implements GenericDAO<Heroi> {
 
+    public HeroiDAO() throws RemoteException {
+        
+    }
+
+    
     @Override
-    public void insert(Heroi e) {
+    public void insert(Heroi e) throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -29,7 +36,7 @@ public class HeroiDAO implements GenericDAO<Heroi> {
     }
 
     @Override
-    public List<Heroi> readList() {
+    public List<Heroi> readList() throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
@@ -42,7 +49,7 @@ public class HeroiDAO implements GenericDAO<Heroi> {
     }
 
     @Override
-    public Heroi read(Heroi e) {
+    public Heroi read(Heroi e) throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
@@ -56,12 +63,12 @@ public class HeroiDAO implements GenericDAO<Heroi> {
     }
 
     @Override
-    public void update(Heroi e, int id) {
+    public void update(Heroi e, int id)throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Heroi e) {
+    public void delete(Heroi e) throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

@@ -5,7 +5,9 @@
  */
 package hanaserver;
 
-import com.br.lp3.servicos.UsuarioImpl;
+import com.br.lp3.DAO.HeroiDAO;
+import com.br.lp3.DAO.UsuarioDAO;
+import com.br.lp3.DAO.*;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -26,8 +28,13 @@ public class HANAServer {
        try {
             // TODO code application logic here
             Registry registro = LocateRegistry.createRegistry(1099);
-            registro.rebind("Usuario", new UsuarioImpl());
-            System.out.println("Serviço Usuario Registrado.");
+            registro.rebind("Usuario", new UsuarioDAO());
+            registro.rebind("Heroi", new HeroiDAO());
+            registro.rebind("Historia", new HistoriaDAO());
+            registro.rebind("HistSugestao", new HistsugestaoDAO());
+            registro.rebind("Vestimenta", new VestimentaDAO());
+            
+            System.out.println("Serviços Registrados.");
         } catch (RemoteException ex) {
             Logger.getLogger(RMIServer.class.getName()).log(Level.SEVERE, null, ex);
         }

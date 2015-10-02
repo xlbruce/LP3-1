@@ -6,6 +6,8 @@
 package com.br.lp3.DAO;
 
 import com.br.lp3.entities.Usuario;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,10 +18,14 @@ import javax.persistence.Query;
  *
  * @author Raquel
  */
-public class UsuarioDAO implements GenericDAO<Usuario> {
+public class UsuarioDAO extends UnicastRemoteObject implements GenericDAO<Usuario> {
+
+    public UsuarioDAO() throws RemoteException {
+    }
+    
 
     @Override
-    public void insert(Usuario e) {
+    public void insert(Usuario e)throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -30,7 +36,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
     }
 
     @Override
-    public List<Usuario> readList() {
+    public List<Usuario> readList() throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
@@ -43,7 +49,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
     }
 
     @Override
-    public Usuario read(Usuario e) {
+    public Usuario read(Usuario e) throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
@@ -58,7 +64,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
     }
 
     @Override
-    public void update(Usuario e, int id) {
+    public void update(Usuario e, int id) throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
@@ -79,7 +85,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
     }
 
     @Override
-    public void delete(Usuario e) {
+    public void delete(Usuario e) throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

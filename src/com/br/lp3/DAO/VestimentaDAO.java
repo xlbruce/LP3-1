@@ -6,6 +6,8 @@
 package com.br.lp3.DAO;
 
 import com.br.lp3.entities.Vestimenta;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,10 +18,14 @@ import javax.persistence.Query;
  *
  * @author Raquel
  */
-public class VestimentaDAO implements GenericDAO<Vestimenta>{
+public class VestimentaDAO extends UnicastRemoteObject implements GenericDAO<Vestimenta>{
+
+    public VestimentaDAO() throws RemoteException {
+    }
+    
 
     @Override
-    public void insert(Vestimenta e) {
+    public void insert(Vestimenta e)throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -29,7 +35,7 @@ public class VestimentaDAO implements GenericDAO<Vestimenta>{
     }
 
     @Override
-    public List<Vestimenta> readList() {
+    public List<Vestimenta> readList()throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
@@ -42,7 +48,7 @@ public class VestimentaDAO implements GenericDAO<Vestimenta>{
     }
 
     @Override
-    public Vestimenta read(Vestimenta e) {
+    public Vestimenta read(Vestimenta e)throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
@@ -56,12 +62,12 @@ public class VestimentaDAO implements GenericDAO<Vestimenta>{
     }
 
     @Override
-    public void update(Vestimenta e, int id) {
+    public void update(Vestimenta e, int id)throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Vestimenta e) {
+    public void delete(Vestimenta e) throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

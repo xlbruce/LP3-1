@@ -6,6 +6,8 @@
 package com.br.lp3.DAO;
 
 import com.br.lp3.entities.Historia;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,10 +18,14 @@ import javax.persistence.Query;
  *
  * @author Raquel
  */
-public class HistoriaDAO implements GenericDAO<Historia> {
+public class HistoriaDAO extends UnicastRemoteObject implements GenericDAO<Historia> {
+
+    public HistoriaDAO() throws RemoteException {
+    }
+    
 
     @Override
-    public void insert(Historia e) {
+    public void insert(Historia e) throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -29,7 +35,7 @@ public class HistoriaDAO implements GenericDAO<Historia> {
     }
 
     @Override
-    public List<Historia> readList() {
+    public List<Historia> readList() throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
@@ -42,7 +48,7 @@ public class HistoriaDAO implements GenericDAO<Historia> {
     }
 
     @Override
-    public Historia read(Historia e) {
+    public Historia read(Historia e) throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
@@ -56,12 +62,12 @@ public class HistoriaDAO implements GenericDAO<Historia> {
          }
 
     @Override
-    public void update(Historia e, int id) {
+    public void update(Historia e, int id)throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Historia e) {
+    public void delete(Historia e) throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
