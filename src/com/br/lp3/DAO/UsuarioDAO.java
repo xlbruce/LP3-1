@@ -64,13 +64,13 @@ public class UsuarioDAO extends UnicastRemoteObject implements GenericDAO<Usuari
     }
 
     @Override
-    public void update(Usuario e, int id) throws RemoteException{
+    public void update(Usuario e) throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
         //atualização de um autor, só no Java
-        Usuario a2 = em.find(Usuario.class, id);
+        Usuario a2 = em.find(Usuario.class,e.getIdUsuario());
         if (e.getLogin() != null) {
             
         }
@@ -85,11 +85,11 @@ public class UsuarioDAO extends UnicastRemoteObject implements GenericDAO<Usuari
     }
 
     @Override
-    public void delete(Usuario e) throws RemoteException{
+    public void delete(int e) throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Usuario a1 = em.find(Usuario.class, e.getIdUsuario());
+        Usuario a1 = em.find(Usuario.class, e);
         em.remove(a1);
         em.getTransaction().commit();
         em.close();

@@ -62,16 +62,16 @@ public class VestimentaDAO extends UnicastRemoteObject implements GenericDAO<Ves
     }
 
     @Override
-    public void update(Vestimenta e, int id)throws RemoteException {
+    public void update(Vestimenta e)throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Vestimenta e) throws RemoteException{
+    public void delete(int e) throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Vestimenta v1 = em.find(Vestimenta.class, e.getIdVestimenta());
+        Vestimenta v1 = em.find(Vestimenta.class, e);
         em.remove(v1);
         em.getTransaction().commit();
         em.close();

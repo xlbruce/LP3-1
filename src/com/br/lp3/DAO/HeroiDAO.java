@@ -63,16 +63,16 @@ public class HeroiDAO extends UnicastRemoteObject implements GenericDAO<Heroi> {
     }
 
     @Override
-    public void update(Heroi e, int id)throws RemoteException {
+    public void update(Heroi e)throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Heroi e) throws RemoteException{
+    public void delete(int e) throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Heroi a1 = em.find(Heroi.class, e.getIdUser());
+        Heroi a1 = em.find(Heroi.class, e);
         em.remove(a1);
         em.getTransaction().commit();
         em.close();

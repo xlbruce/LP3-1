@@ -17,6 +17,6 @@ public interface GenericDAO<T> extends Remote {
     public void insert(T e)throws RemoteException ;
     public List<T> readList()throws RemoteException;
     public T read(T e)throws RemoteException;
-    public void update(T e, int id)throws RemoteException;
-    public void delete (T e)throws RemoteException;
+    public void update(T e)throws RemoteException;
+    public void delete (int e)throws RemoteException;
 }

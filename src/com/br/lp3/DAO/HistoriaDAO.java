@@ -62,16 +62,16 @@ public class HistoriaDAO extends UnicastRemoteObject implements GenericDAO<Histo
          }
 
     @Override
-    public void update(Historia e, int id)throws RemoteException {
+    public void update(Historia e)throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Historia e) throws RemoteException{
+    public void delete(int e) throws RemoteException{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Historia h1 = em.find(Historia.class, e.getIdheroi());
+        Historia h1 = em.find(Historia.class, e);
         em.remove(h1);
         em.getTransaction().commit();
         em.close();
