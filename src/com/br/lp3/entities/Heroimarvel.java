@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Raquel
+ * @author william
  */
 @Entity
 @Table(name = "HEROIMARVEL")
@@ -39,18 +39,14 @@ public class Heroimarvel implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_HEROIMAR")
     private Integer idHeroimar;
-    
     @Basic(optional = false)
     @Column(name = "NOME_HEROIMAR")
     private String nomeHeroimar;
-    
     @Column(name = "HISTORIA")
     private String historia;
-    
     @Basic(optional = false)
     @Column(name = "CURTIDA")
     private int curtida;
-    
     @JoinColumn(name = "ID_USERMARVEL", referencedColumnName = "ID_USUARIO")
     @ManyToOne(optional = false)
     private Usuario idUsermarvel;

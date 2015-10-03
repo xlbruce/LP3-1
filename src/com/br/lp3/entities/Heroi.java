@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Raquel
+ * @author william
  */
 @Entity
 @Table(name = "HEROI")
@@ -41,26 +41,20 @@ public class Heroi implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_HEROI")
     private Integer idHeroi;
-    
     @Basic(optional = false)
     @Column(name = "NOME_HEROI")
     private String nomeHeroi;
-    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idheroi")
     private Collection<Histsugestao> histsugestaoCollection;
-    
     @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USUARIO")
     @ManyToOne(optional = false)
     private Usuario idUser;
-    
     @JoinColumn(name = "ID_CORPO", referencedColumnName = "ID_VESTIMENTA")
     @ManyToOne(optional = false)
     private Vestimenta idCorpo;
-    
     @JoinColumn(name = "ID_CAPACETE", referencedColumnName = "ID_VESTIMENTA")
     @ManyToOne(optional = false)
     private Vestimenta idCapacete;
-    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idheroi")
     private Collection<Historia> historiaCollection;
 
