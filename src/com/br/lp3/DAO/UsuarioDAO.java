@@ -71,9 +71,6 @@ public class UsuarioDAO extends UnicastRemoteObject implements GenericDAO<Usuari
         em.getTransaction().begin();
         //atualização de um autor, só no Java
         Usuario a2 = em.find(Usuario.class,e.getIdUsuario());
-        if (e.getLogin() != null) {
-            
-        }
         em.refresh(a2);
         
         //enviado autor atualizado para o banco de dados

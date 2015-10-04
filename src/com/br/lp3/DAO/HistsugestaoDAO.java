@@ -63,8 +63,19 @@ public class HistsugestaoDAO extends UnicastRemoteObject implements GenericDAO<c
 
     @Override
     public void update(Histsugestao e) throws RemoteException{
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        //atualização de um autor, só no Java
+        Histsugestao a2 = em.find(Histsugestao.class, e.getIdSugestao());
+        em.refresh(a2);
+        
+        //enviado autor atualizado para o banco de dados
+        em.persist(a2);
+        em.getTransaction().commit();
+
+        //fechamento do EntityManager
+        em.close();    }
 
     @Override
     public void delete(int e)throws RemoteException {
