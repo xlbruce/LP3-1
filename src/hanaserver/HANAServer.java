@@ -32,6 +32,7 @@ public class HANAServer {
             registro.rebind("Heroi", new HeroiDAO());
             registro.rebind("Historia", new HistoriaDAO());
             registro.rebind("HistSugestao", new HistsugestaoDAO());
+            registro.rebind("Heroimarvel", new HeroimarvelDAO());
             registro.rebind("Vestimenta", new VestimentaDAO());
             
             System.out.println("Serviços Registrados.");

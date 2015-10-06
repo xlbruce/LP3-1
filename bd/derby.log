@@ -1,7 +1,7 @@
-Sat Oct 03 18:08:25 BRT 2015 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
+Mon Oct 05 08:41:42 BRT 2015 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
 ----------------------------------------------------------------
-Sat Oct 03 18:10:30 BRT 2015:
- Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-0150-2f88-c81c-000009eeaf3f
+Mon Oct 05 08:50:08 BRT 2015:
+ Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-0150-37ce-9e0b-000009eeaf3f
 no diretório de banco de dados C:\Users\william\Documents\projeto LP3\HANA\LP3\bd\hanaDB 
 
 java.vendor=Oracle Corporation
