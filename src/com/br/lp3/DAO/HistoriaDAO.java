@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.br.lp3.DAO;
 
 import com.br.lp3.entities.Historia;
@@ -16,16 +11,16 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Raquel
+ * @author Raquel Gallo (31458521)
+ * @author William Cisang (31441564)
  */
 public class HistoriaDAO extends UnicastRemoteObject implements GenericDAO<Historia> {
 
     public HistoriaDAO() throws RemoteException {
     }
-    
 
     @Override
-    public void insert(Historia e) throws RemoteException{
+    public void insert(Historia e) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -35,50 +30,51 @@ public class HistoriaDAO extends UnicastRemoteObject implements GenericDAO<Histo
     }
 
     @Override
-    public List<Historia> readList() throws RemoteException{
+    public List<Historia> readList() throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-        //criação de um novo autor, só no Java
+        //criação de uma nova história, somente no Java
         Query queryuser = em.createNamedQuery("Historia.findAll");
-        List<Historia> listaheroi =  queryuser.getResultList();
-        
+        List<Historia> listaheroi = queryuser.getResultList();
+
         return listaheroi;
     }
 
     @Override
-    public Historia read(Historia e) throws RemoteException{
+    public Historia read(Historia e) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-        //criação de um novo autor, só no Java
+        //criação de uma nova história, somente no Java
         Query queryuser = em.createNamedQuery("Historia.findByIdheroi");
         queryuser.setParameter("idheroi", e.getIdheroi());
-        List<Historia> listahistoria =  queryuser.getResultList();
-        
+        List<Historia> listahistoria = queryuser.getResultList();
+
         return listahistoria.get(0);
-         }
+    }
 
     @Override
-    public void update(Historia e)throws RemoteException {
+    public void update(Historia e) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        //atualização de um autor, só no Java
+        //atualização de uma história, somente no Java
         Historia a2 = em.find(Historia.class, e.getIdHistoria());
-        em.refresh(a2);
-        
-        //enviado autor atualizado para o banco de dados
+        a2.setHistoria(e.getHistoria());
+        a2.setRoteiro(e.getRoteiro());
+        //envia historia atualizada para o banco de dados
         em.persist(a2);
         em.getTransaction().commit();
 
         //fechamento do EntityManager
-        em.close();        }
+        em.close();
+    }
 
     @Override
-    public void delete(int e) throws RemoteException{
+    public void delete(int e) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -87,6 +83,5 @@ public class HistoriaDAO extends UnicastRemoteObject implements GenericDAO<Histo
         em.getTransaction().commit();
         em.close();
     }
-    
-}
 
+}

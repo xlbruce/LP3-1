@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.br.lp3.DAO;
 
 import com.br.lp3.entities.Vestimenta;
@@ -16,16 +11,16 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Raquel
+ * @author Raquel Gallo (31458521)
+ * @author William Cisang (31441564)
  */
-public class VestimentaDAO extends UnicastRemoteObject implements GenericDAO<Vestimenta>{
+public class VestimentaDAO extends UnicastRemoteObject implements GenericDAO<Vestimenta> {
 
     public VestimentaDAO() throws RemoteException {
     }
-    
 
     @Override
-    public void insert(Vestimenta e)throws RemoteException {
+    public void insert(Vestimenta e) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -35,50 +30,51 @@ public class VestimentaDAO extends UnicastRemoteObject implements GenericDAO<Ves
     }
 
     @Override
-    public List<Vestimenta> readList()throws RemoteException {
+    public List<Vestimenta> readList() throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-        //criação de um novo autor, só no Java
+        //criação de uma nova vestimenta, somente no Java
         Query queryuser = em.createNamedQuery("Vestimenta.findAll");
-        List<Vestimenta> listavestimenta =  queryuser.getResultList();
-        
+        List<Vestimenta> listavestimenta = queryuser.getResultList();
+
         return listavestimenta;
     }
 
     @Override
-    public Vestimenta read(Vestimenta e)throws RemoteException {
+    public Vestimenta read(Vestimenta e) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-        //criação de um novo autor, só no Java
+        //criação de uma nova vestimenta, somente no Java
         Query queryuser = em.createNamedQuery("Vestimenta.findByIdVestimenta");
         queryuser.setParameter("idVestimenta", e.getIdVestimenta());
-        List<Vestimenta> listavestimenta =  queryuser.getResultList();
-        
+        List<Vestimenta> listavestimenta = queryuser.getResultList();
+
         return listavestimenta.get(0);
     }
 
     @Override
-    public void update(Vestimenta e)throws RemoteException {
+    public void update(Vestimenta e) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        //atualização de um autor, só no Java
+        //atualização de uma vestimenta, somente no Java
         Vestimenta a2 = em.find(Vestimenta.class, e.getIdVestimenta());
         em.refresh(a2);
-        
-        //enviado autor atualizado para o banco de dados
+
+        //envia vestimenta atualizada para o banco de dados
         em.persist(a2);
         em.getTransaction().commit();
 
         //fechamento do EntityManager
-        em.close();     }
+        em.close();
+    }
 
     @Override
-    public void delete(int e) throws RemoteException{
+    public void delete(int e) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -87,5 +83,5 @@ public class VestimentaDAO extends UnicastRemoteObject implements GenericDAO<Ves
         em.getTransaction().commit();
         em.close();
     }
-    
+
 }

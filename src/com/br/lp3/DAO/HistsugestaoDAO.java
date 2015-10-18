@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.br.lp3.DAO;
 
 import com.br.lp3.entities.Histsugestao;
@@ -16,16 +11,16 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Raquel
+ * @author Raquel Gallo (31458521)
+ * @author William Cisang (31441564)
  */
-public class HistsugestaoDAO extends UnicastRemoteObject implements GenericDAO<com.br.lp3.entities.Histsugestao>{
+public class HistsugestaoDAO extends UnicastRemoteObject implements GenericDAO<com.br.lp3.entities.Histsugestao> {
 
     public HistsugestaoDAO() throws RemoteException {
     }
-    
 
     @Override
-    public void insert(com.br.lp3.entities.Histsugestao e) throws RemoteException{
+    public void insert(com.br.lp3.entities.Histsugestao e) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -35,50 +30,51 @@ public class HistsugestaoDAO extends UnicastRemoteObject implements GenericDAO<c
     }
 
     @Override
-    public List<com.br.lp3.entities.Histsugestao> readList()throws RemoteException {
+    public List<com.br.lp3.entities.Histsugestao> readList() throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-        //criação de um novo autor, só no Java
+        //criação de uma nova histoória sugestão, somente no Java
         Query queryuser = em.createNamedQuery("Histsugestao.findAll");
-        List<com.br.lp3.entities.Histsugestao> listahistsugestao =  queryuser.getResultList();
-        
+        List<com.br.lp3.entities.Histsugestao> listahistsugestao = queryuser.getResultList();
+
         return listahistsugestao;
     }
 
     @Override
-    public com.br.lp3.entities.Histsugestao read(Histsugestao e) throws RemoteException{
+    public com.br.lp3.entities.Histsugestao read(Histsugestao e) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-        //criação de um novo autor, só no Java
+        //criação de uma nova histoória sugestão, somente no Java
         Query queryuser = em.createNamedQuery("Histsugestao.findByIdheroi");
         queryuser.setParameter("idheroi", e.getIdheroi());
-        List<com.br.lp3.entities.Histsugestao> listahistsugestao =  queryuser.getResultList();
-        
+        List<com.br.lp3.entities.Histsugestao> listahistsugestao = queryuser.getResultList();
+
         return listahistsugestao.get(0);
     }
 
     @Override
-    public void update(Histsugestao e) throws RemoteException{
+    public void update(Histsugestao e) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        //atualização de um autor, só no Java
+        //atualização de uma história sugestão, somente no Java
         Histsugestao a2 = em.find(Histsugestao.class, e.getIdSugestao());
         em.refresh(a2);
-        
-        //enviado autor atualizado para o banco de dados
+
+        //envia história sugestão atualizada para o banco de dados
         em.persist(a2);
         em.getTransaction().commit();
 
         //fechamento do EntityManager
-        em.close();    }
+        em.close();
+    }
 
     @Override
-    public void delete(int e)throws RemoteException {
+    public void delete(int e) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -87,5 +83,5 @@ public class HistsugestaoDAO extends UnicastRemoteObject implements GenericDAO<c
         em.getTransaction().commit();
         em.close();
     }
-    
+
 }

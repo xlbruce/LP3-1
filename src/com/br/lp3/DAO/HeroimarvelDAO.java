@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.br.lp3.DAO;
 
 import com.br.lp3.entities.Heroimarvel;
@@ -16,14 +11,14 @@ import javax.persistence.Query;
 
 /**
  *
- * @author william
+ * @author William Cisang (31441564)
+ * @author Raquel Gallo (31458521)
  */
-public class HeroimarvelDAO extends UnicastRemoteObject implements GenericDAO<Heroimarvel>{
+public class HeroimarvelDAO extends UnicastRemoteObject implements GenericDAO<Heroimarvel> {
 
     public HeroimarvelDAO() throws RemoteException {
     }
 
-    
     @Override
     public void insert(Heroimarvel e) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
@@ -40,10 +35,10 @@ public class HeroimarvelDAO extends UnicastRemoteObject implements GenericDAO<He
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-        //criação de um novo autor, só no Java
+        //criação de um novo heroi marvel, somente no Java
         Query queryuser = em.createNamedQuery("Heroimarvel.findAll");
-        List<Heroimarvel> listaheroimarvel =  queryuser.getResultList();
-        
+        List<Heroimarvel> listaheroimarvel = queryuser.getResultList();
+
         return listaheroimarvel;
     }
 
@@ -53,11 +48,11 @@ public class HeroimarvelDAO extends UnicastRemoteObject implements GenericDAO<He
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-        //criação de um novo autor, só no Java
+        //criação de um novo heroi marvel, somente no Java
         Query queryuser = em.createNamedQuery("Heroimarvel.findByIdHeroimar");
         queryuser.setParameter("id_heroimar", e.getIdHeroimar());
-        List<Heroimarvel> listaheroimarvel =  queryuser.getResultList();
-        
+        List<Heroimarvel> listaheroimarvel = queryuser.getResultList();
+
         return listaheroimarvel.get(0);
     }
 
@@ -66,11 +61,11 @@ public class HeroimarvelDAO extends UnicastRemoteObject implements GenericDAO<He
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        //atualização de um autor, só no Java
+        //atualização de um heroi marvel, somente no Java
         Heroimarvel hm = em.find(Heroimarvel.class, e.getIdHeroimar());
         em.refresh(hm);
-        
-        //enviado autor atualizado para o banco de dados
+
+        //envia heroi marvel atualizado para o banco de dados
         em.persist(hm);
         em.getTransaction().commit();
 
@@ -88,5 +83,5 @@ public class HeroimarvelDAO extends UnicastRemoteObject implements GenericDAO<He
         em.getTransaction().commit();
         em.close();
     }
-    
+
 }

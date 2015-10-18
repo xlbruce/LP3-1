@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.br.lp3.entities;
 
 import java.io.Serializable;
@@ -21,7 +16,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author william
+ * @author William Cisang (31441564)
+ * @author Raquel Gallo (31458521)
  */
 @Entity
 @Table(name = "HISTORIA")
@@ -32,6 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Historia.findByHistoria", query = "SELECT h FROM Historia h WHERE h.historia = :historia"),
     @NamedQuery(name = "Historia.findByRoteiro", query = "SELECT h FROM Historia h WHERE h.roteiro = :roteiro")})
 public class Historia implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -117,5 +114,5 @@ public class Historia implements Serializable {
     public String toString() {
         return "com.br.lp3.entities.Historia[ idHistoria=" + idHistoria + " ]";
     }
-    
+
 }

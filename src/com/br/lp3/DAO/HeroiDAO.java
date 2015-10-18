@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.br.lp3.DAO;
 
 import com.br.lp3.entities.Heroi;
@@ -16,17 +11,17 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Raquel
+ * @author Raquel Gallo (31458521)
+ * @author William Cisang (31441564)
  */
 public class HeroiDAO extends UnicastRemoteObject implements GenericDAO<Heroi> {
 
     public HeroiDAO() throws RemoteException {
-        
+
     }
 
-    
     @Override
-    public void insert(Heroi e) throws RemoteException{
+    public void insert(Heroi e) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -41,46 +36,46 @@ public class HeroiDAO extends UnicastRemoteObject implements GenericDAO<Heroi> {
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-        //criação de um novo autor, só no Java
+        //criação de um novo heroi, somente no Java
         Query queryuser = em.createNamedQuery("Heroi.findAll");
-        List<Heroi> listaheroi =  queryuser.getResultList();
-        
+        List<Heroi> listaheroi = queryuser.getResultList();
+
         return listaheroi;
     }
 
     @Override
-    public Heroi read(Heroi e) throws RemoteException{
+    public Heroi read(Heroi e) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-        //criação de um novo autor, só no Java
+        //criação de um novo heroi, somente no Java
         Query queryuser = em.createNamedQuery("Heroi.findByIduser");
         queryuser.setParameter("iduser", e.getIdUser());
-        List<Heroi> listaheroi =  queryuser.getResultList();
-        
+        List<Heroi> listaheroi = queryuser.getResultList();
+
         return listaheroi.get(0);
     }
 
     @Override
-    public void update(Heroi e)throws RemoteException {
+    public void update(Heroi e) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        //atualização de um autor, só no Java
+        //atualização de um heroi, somente no Java
         Heroi a2 = em.find(Heroi.class, e.getIdHeroi());
         em.refresh(a2);
-        
-        //enviado autor atualizado para o banco de dados
+
+        //envia heroi atualizado para o banco de dados
         em.persist(a2);
         em.getTransaction().commit();
 
         //fechamento do EntityManager
-        em.close();    
+        em.close();
     }
 
     @Override
-    public void delete(int e) throws RemoteException{
+    public void delete(int e) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -89,6 +84,5 @@ public class HeroiDAO extends UnicastRemoteObject implements GenericDAO<Heroi> {
         em.getTransaction().commit();
         em.close();
     }
-    
-}
 
+}
