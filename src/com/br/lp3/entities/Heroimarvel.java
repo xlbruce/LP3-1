@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.br.lp3.entities;
 
 import java.io.Serializable;
@@ -16,8 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author William Cisang (31441564)
- * @author Raquel Gallo (31458521)
+ * @author willi
  */
 @Entity
 @Table(name = "HEROIMARVEL")
@@ -27,9 +31,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Heroimarvel.findByIdHeroimar", query = "SELECT h FROM Heroimarvel h WHERE h.idHeroimar = :idHeroimar"),
     @NamedQuery(name = "Heroimarvel.findByNomeHeroimar", query = "SELECT h FROM Heroimarvel h WHERE h.nomeHeroimar = :nomeHeroimar"),
     @NamedQuery(name = "Heroimarvel.findByHistoria", query = "SELECT h FROM Heroimarvel h WHERE h.historia = :historia"),
-    @NamedQuery(name = "Heroimarvel.findByCurtida", query = "SELECT h FROM Heroimarvel h WHERE h.curtida = :curtida")})
+    @NamedQuery(name = "Heroimarvel.findByCurtida", query = "SELECT h FROM Heroimarvel h WHERE h.curtida = :curtida"),
+    @NamedQuery(name = "Heroimarvel.findByImage", query = "SELECT h FROM Heroimarvel h WHERE h.image = :image")})
 public class Heroimarvel implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +48,8 @@ public class Heroimarvel implements Serializable {
     @Basic(optional = false)
     @Column(name = "CURTIDA")
     private int curtida;
+    @Column(name = "IMAGE")
+    private String image;
     @JoinColumn(name = "ID_USERMARVEL", referencedColumnName = "ID_USUARIO")
     @ManyToOne(optional = false)
     private Usuario idUsermarvel;
@@ -93,6 +99,14 @@ public class Heroimarvel implements Serializable {
         this.curtida = curtida;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public Usuario getIdUsermarvel() {
         return idUsermarvel;
     }
@@ -125,5 +139,5 @@ public class Heroimarvel implements Serializable {
     public String toString() {
         return "com.br.lp3.entities.Heroimarvel[ idHeroimar=" + idHeroimar + " ]";
     }
-
+    
 }
