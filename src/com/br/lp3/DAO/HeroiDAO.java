@@ -15,15 +15,17 @@ import javax.persistence.Query;
  * @author William Cisang (31441564)
  */
 public class HeroiDAO extends UnicastRemoteObject implements GenericDAO<Heroi> {
+    
+    EntityManagerFactory emf;
+    EntityManager em;
 
     public HeroiDAO() throws RemoteException {
-
+        emf = Persistence.createEntityManagerFactory("HANAServerPU");
+        em = emf.createEntityManager();
     }
 
     @Override
     public void insert(Heroi e) throws RemoteException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
-        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(e);
         em.getTransaction().commit();
@@ -32,9 +34,6 @@ public class HeroiDAO extends UnicastRemoteObject implements GenericDAO<Heroi> {
 
     @Override
     public List<Heroi> readList() throws RemoteException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
-        EntityManager em = emf.createEntityManager();
-
         em.getTransaction().begin();
         //criação de um novo heroi, somente no Java
         Query queryuser = em.createNamedQuery("Heroi.findAll");
@@ -45,9 +44,6 @@ public class HeroiDAO extends UnicastRemoteObject implements GenericDAO<Heroi> {
 
     @Override
     public Heroi read(Heroi e) throws RemoteException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
-        EntityManager em = emf.createEntityManager();
-
         em.getTransaction().begin();
         //criação de um novo heroi, somente no Java
         Query queryuser = em.createNamedQuery("Heroi.findByIduser");
@@ -76,8 +72,6 @@ public class HeroiDAO extends UnicastRemoteObject implements GenericDAO<Heroi> {
 
     @Override
     public void delete(int e) throws RemoteException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
-        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         Heroi a1 = em.find(Heroi.class, e);
         em.remove(a1);
