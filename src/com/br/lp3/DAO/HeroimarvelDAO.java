@@ -16,13 +16,17 @@ import javax.persistence.Query;
  */
 public class HeroimarvelDAO extends UnicastRemoteObject implements GenericDAO<Heroimarvel> {
 
+    EntityManagerFactory emf;
+    EntityManager em;
+    
     public HeroimarvelDAO() throws RemoteException {
+        emf = Persistence.createEntityManagerFactory("HANAServerPU");
+        em = emf.createEntityManager();
     }
 
     @Override
     public void insert(Heroimarvel e) throws RemoteException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
-        EntityManager em = emf.createEntityManager();
+        
         em.getTransaction().begin();
         em.persist(e);
         em.getTransaction().commit();
@@ -31,9 +35,6 @@ public class HeroimarvelDAO extends UnicastRemoteObject implements GenericDAO<He
 
     @Override
     public List<Heroimarvel> readList() throws RemoteException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
-        EntityManager em = emf.createEntityManager();
-
         em.getTransaction().begin();
         //criação de um novo heroi marvel, somente no Java
         Query queryuser = em.createNamedQuery("Heroimarvel.findAll");
@@ -44,9 +45,6 @@ public class HeroimarvelDAO extends UnicastRemoteObject implements GenericDAO<He
 
     @Override
     public Heroimarvel read(Heroimarvel e) throws RemoteException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
-        EntityManager em = emf.createEntityManager();
-
         em.getTransaction().begin();
         //criação de um novo heroi marvel, somente no Java
         Query queryuser = em.createNamedQuery("Heroimarvel.findByIdHeroimar");
@@ -58,8 +56,6 @@ public class HeroimarvelDAO extends UnicastRemoteObject implements GenericDAO<He
 
     @Override
     public void update(Heroimarvel e) throws RemoteException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
-        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         //atualização de um heroi marvel, somente no Java
         Heroimarvel hm = em.find(Heroimarvel.class, e.getIdHeroimar());
@@ -75,8 +71,6 @@ public class HeroimarvelDAO extends UnicastRemoteObject implements GenericDAO<He
 
     @Override
     public void delete(int e) throws RemoteException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("HANAServerPU");
-        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         Heroimarvel hm2 = em.find(Heroimarvel.class, e);
         em.remove(hm2);
